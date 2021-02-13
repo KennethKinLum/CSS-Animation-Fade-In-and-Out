@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CSS Animation Fade In and Fade Out</title>
+
+    <style>
+        body {
+            background: #fff;
+        }
+
+        table {
+            border-collapse: collapse;
+            margin: 20px;
+        }
+
+        td {
+            padding: 0.3em 1.23em;
+            border: 1px solid #ccc;
+        }
+
+        .new-row {
+            animation: 1s linear fade_in_and_out;
+        }
+
+        @keyframes fade_in_and_out {
+            0% {
+                opacity: 0;
+                background: #fff
+            }
+
+            50% {
+                opacity: 1;
+                background: #ff0
+            }
+
+            100% {
+                background: #fff
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <button id="btn">Click</button>
+    <table id="tbl">
+        <tbody>
+            <tr>
+                <td>1</td>
+                <td>10</td>
+            </tr>
+            <tr>
+                <td>2</td>
+                <td>20</td>
+            </tr>
+            <tr>
+                <td>3</td>
+                <td>30</td>
+            </tr>
+            <tr>
+                <td>4</td>
+                <td>40</td>
+            </tr>
+            <tr>
+                <td>5</td>
+                <td>50</td>
+            </tr>
+            <tr>
+                <td>6</td>
+                <td>60</td>
+            </tr>
+            <tr>
+                <td>7</td>
+                <td>70</td>
+            </tr>
+            <tr>
+                <td>8</td>
+                <td>80</td>
+            </tr>
+            <tr>
+                <td>9</td>
+                <td>90</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <script>
+
+        const tableElement = document.querySelector("#tbl tbody");
+
+        const pickOne = arr => arr[Math.floor(Math.random() * arr.length)];
+
+        const addNewRow = (tableElement, newRow) => {
+            const newCell1 = document.createElement("td"),
+                newCell2 = document.createElement("td");
+
+            newRow.append(newCell1);
+            newRow.append(newCell2);
+            newCell1.append(document.createTextNode("hello"));
+            newCell2.append(document.createTextNode(`i am new ${Math.floor(Math.random() * 1000)}`));
+            tableElement.insertBefore(newRow, pickOne(tableElement.children));
+        };
+
+        document.querySelector("#btn").addEventListener("click", ev => {
+            const newRow = document.createElement("tr");
+
+            addNewRow(tableElement, newRow);
+            newRow.classList.add("new-row");
+        });
+    </script>
+
+</body>
+
+</html>
